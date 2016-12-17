@@ -1,0 +1,50 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body_id 'edit' %}
+
+
+{% block main %}
+    <div class="register">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('edit_profile') }}" method="post" name="edit">
+                <fieldset>
+                    <legend>Edit Profile</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_email">Email</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" id="user_email" name="user[email]" required type="email" value="{{ user.email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_fullName">Username</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="user_fullName" name="user[fullName]" required value="{{ user.fullName }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_password_first">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="user[password][first]" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_password_second">Confirm Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_password_second" placeholder="Password" name="user[password][second]" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                            <button><a href="{{ path('home_page') }}" class="btn btn-primary">Cancel</a></button>
+                        </div>
+                    </div>
+
+                    {{  form_row(form._token) }}
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

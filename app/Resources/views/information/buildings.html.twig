@@ -1,0 +1,43 @@
+
+
+{% extends 'base.html.twig' %}
+{% block body_id 'buildings' %}
+
+{% block main %}
+
+    <div class="error">
+        {% if error is not null %}
+            {{ error }}
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="component">
+            <table class="style-table">
+                <thead class="table-bordered">
+                    <th>Building</th>
+                    <th>Build Time</th>
+                    <th>Wood Cost</th>
+                    <th>Stone Cost</th>
+                    <th>Gold Cost</th>
+                    <th>Create building</th>
+                </thead>
+                {% for building in buildings %}
+                    <tr>
+                            <th>{{ building.name }}</th>
+                            <td>{{ building.buildTime }}</td>
+                            <td>{{ building.woodCost }}</td>
+                            <td>{{ building.stoneCost }}</td>
+                            <td>{{ building.goldCost }}</td>
+                        <td>  <a class="btn btn-default btn-xs"
+                                       href="{{ path('building_create', {'id': building.id} ) }}">Build</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
