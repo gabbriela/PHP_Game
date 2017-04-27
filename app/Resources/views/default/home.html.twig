@@ -7,24 +7,24 @@
 <h3>Hello, {{ user.fullName }}!</h3>
 
     <h3>Your units:</h3>
-    <table class="style-table">
+    <table class="table-responsive table table-bordered table-hover table-condensed" >
       <thead>
-            <th>Name</th>
-            <th>Food per day</th>
-            <th>Life</th>
-            <th>Status</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Food per day</th>
+            <th class="text-center">Life</th>
+            <th class="text-center">Status</th>
         </thead>
         <tbody>
             {% for unit in unitsFree %}
                 <tr>
-                    <td>{{ unit.getUnit.name}}</td>
-                    <td>{{ unit.getUnit.foodPerDay }}</td>
-                    <td>{{ unit.lifePoints }}</td>
-                    <td>{{ unit.status }}</td>
+                    <td class="text-center">{{ unit.getUnit.name}}</td>
+                    <td class="text-center">{{ unit.getUnit.foodPerDay }}</td>
+                    <td class="text-center">{{ unit.lifePoints }}</td>
+                    <td class="text-center">{{ unit.status }}</td>
                 </tr>
             {% endfor %}
             {% for unit in unitsBusy %}
-                <tr>
+                <tr class="text-center">
                     <td>{{ unit.getUnit.name}}</td>
                     <td>{{ unit.getUnit.foodPerDay }}</td>
                     <td>{{ unit.lifePoints }}</td>
@@ -36,17 +36,17 @@
 
 
     <h3>Your Buildings:</h3>
-    <table class="style-table">
+    <table class="table-responsive table table-bordered table-hover table-condensed">
         <thead>
-            <th>Building</th>
-            <th>Building Level</th>
-            <th>Wood Cost</th>
-            <th>Stone Cost</th>
-            <th>Gold Cost</th>
-            <th>Action</th>
+            <th class="text-center">Building</th>
+            <th  class="text-center">Building Level</th>
+            <th  class="text-center">Wood Cost</th>
+            <th  class="text-center">Stone Cost</th>
+            <th  class="text-center">Gold Cost</th>
+            <th  class="text-center">Action</th>
         </thead>
         {% for building in buildings %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ building.building.name }}</td>
                 <td>{{ building.buildingLevel }}</td>
                 <td>{{ 200 * (building.buildingLevel / 2) }}</td>
