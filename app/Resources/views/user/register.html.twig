@@ -7,31 +7,31 @@
 {% block main %}
     <div class="register">
 
-        <form class="" action="{{ path('user_register') }}" method="post" name="register">
-            <fieldset>
-                <legend>Register</legend>
+            <form class="" action="{{ path('user_register') }}" method="post" name="register">
+                <fieldset>
+                    <legend>Register</legend>
 
-                <label for="user_email">Email</label>
-                <input type="email" id="user_email" placeholder="Email" name="user[email]" required >
+                        <label for="user_email">Email</label>
+                        <input type="email" id="user_email" placeholder="Email" name="user[email]" required >
 
-                <label for="user_fullName">Username</label>
-                <input type="text" class="form-control" id="user_fullName" placeholder="Full Name" name="user[fullName]" required>
-
-
-
-                <label  for="user_password_first">Password</label>
-                <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="user[password][first]" required>
-
-                <label  for="user_password_second">Confirm Password</label>
-                <input type="password"  id="user_password_second" placeholder="Password" name="user[password][second]" required>
+                        <label for="user_fullName">Username</label>
+                        <input type="text" class="form-control" id="user_fullName" placeholder="Full Name" name="user[fullName]" required>
 
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <label  for="user_password_first">Password</label>
+                        <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="user[password][first]" required>
+
+                        <label  for="user_password_second">Confirm Password</label>
+                        <input type="password"  id="user_password_second" placeholder="Password" name="user[password][second]" required>
 
 
-                {{  form_row(form._token) }}
-            </fieldset>
-        </form>
-    </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                    {{  form_row(form._token) }}
+                </fieldset>
+            </form>
+        </div>
 
 {% endblock %}

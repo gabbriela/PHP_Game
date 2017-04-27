@@ -1,0 +1,41 @@
+
+{% extends 'base.html.twig' %}
+{% block body_id 'map' %}
+
+{% block main %}
+
+    {% set counter = 0 %}
+    {% set user = mapAll[counter] %}
+
+
+    <div class="map">
+            <table style="border: 1px solid black">
+
+                {% for y in 0..200 %}
+                    <tr >
+
+                            {% for x in 0..200 %}
+                                <td >
+                                    {% if y == user.positionY and x == user.positionX %}
+                                        <div style="">
+                                            <img src="{{ asset('images/map-castle.png') }}" style="height: 80px; width: 80px;">
+                                            {{ user.user.fullName }} <br/>
+                                            <a href="{{ path('attack_prepare', {'id': user.user.id} ) }}" > Send Spy </a>
+                                            <a href="{{ path('attack_prepare', {'id': user.user.id} ) }}" > Attack </a>
+
+                                        </div>
+
+                                        {% set counter = counter + 1 %}
+                                        {% if counter < size %}
+                                            {% set user = mapAll[counter] %}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+
+{% endblock %}

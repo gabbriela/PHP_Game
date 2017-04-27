@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id "progress" %}
+
+
+
+{% block main %}
+
+    <div>Build in progress</div>
+    <table class="style-table">
+        <thead>
+            <th>
+                Building
+            </th>
+            <th>Ready after</th>
+        </thead>
+        {% for building in progressBuildings %}
+        <tr>
+            <td>{{ building['building'] }}</td>
+            <td>{{ building['readyAfter'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <div>Level Up in progress</div>
+    <table class="style-table">
+        <thead>
+        <th>
+            Building
+        </th>
+        <th>Level after</th>
+        </thead>
+        {% for building in levelBuildings %}
+            <tr>
+                <td>{{ building['buildingName'] }}</td>
+                <td>{{ building['readyAfter'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <div>Units in progress</div>
+    <table class="style-table">
+        <thead>
+        <th>
+            Unit
+        </th>
+        <th>Ready after</th>
+        </thead>
+        {% for unit in units %}
+            <tr>
+                <td>{{ unit['name'] }}</td>
+                <td>{{ unit['readyAfter'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+

@@ -1,104 +1,104 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+   See http://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block title %} Hegemony {% endblock %}</title>
+
+    <title>
+        {% block title %} Hegemony {% endblock %}
+    </title>
+
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon4.png') }}"/>
 </head>
 
 <body id="{% block body_id %}{% endblock %}">
-
 <div class="login-picture">
-    {% block header %}
-        <header>
+{% block header %}
+    <header>
 
-            <ul class="nav-top">
-                {% if app.user %}
+                <ul class="nav-top">
+                    {% if app.user %}
 
-                    {{ render(controller(
-                    'AppBundle:Resources:resources'
-                    )) }}
-                {% endif %}
+                        {{ render(controller(
+                        'AppBundle:Resources:resources'
+                        )) }}
+                    {% endif %}
 
 
-                {% if app.user %}
+                        {% if app.user %}
 
-                    <li class="li-right">
-                        <a href="{{ path('security_logout') }}">
-                            Logout
-                        </a>
-                    </li>
+                            <li class="li-right">
+                                <a href="{{ path('security_logout') }}">
+                                    Logout
+                                </a>
+                            </li>
 
-                    <li class="li-right">
-                        <a href="{{ path('user_profile') }}">
-                            My Profile
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="li-right">
-                        <a href="{{ path('user_register') }}">
-                            REGISTER
-                        </a>
-                    </li>
-                    <li class="li-right">
-                        <a href="{{ path('security_login') }}">
-                            LOGIN
-                        </a>
-                    </li>
-                {% endif %}
+                            <li class="li-right">
+                                <a href="{{ path('user_profile') }}">
+                                    My Profile
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="li-right">
+                                <a href="{{ path('user_register') }}">
+                                    REGISTER
+                                </a>
+                            </li>
+                            <li class="li-right">
+                                <a href="{{ path('security_login') }}">
+                                    LOGIN
+                                </a>
+                            </li>
+                        {% endif %}
 
-            </ul>
+                </ul>
 
-        </header>
-    {% endblock %}
+    </header>
+{% endblock %}
 
-    {% block navbar %}
+    {% block body %}
 
         {% if app.user %}
             <div class="absolute">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{ path('home_page') }}" > My Kingdom </a></li>
-                    <li><a href="{{ path('buildings') }}" > Build </a></li>
-                    <li><a href="{{ path('resource_explore') }}" > Explore Resources </a></li>
-                    <li><a href="{{ path('list_units') }}" > Hire units </a></li>
-                    <li><a href="{{ path('in_progress') }}" > In Progress </a></li>
-                    <li><a href="{{ path('battle_report') }}" > Battle reports </a></li>
-                    <li><a href="{{ path('map') }}" class="navbar-brand"> Map </a></li>
-                </ul>
+            <ul class="nav-left">
+                <li><a href="{{ path('home_page') }}" > My Kingdom </a></li>
+               <li><a href="{{ path('buildings') }}" > Build </a></li>
+                <li><a href="{{ path('resource_explore') }}" > Explore Resources </a></li>
+                <li><a href="{{ path('list_units') }}" > Hire units </a></li>
+                <li><a href="{{ path('in_progress') }}" > In Progress </a></li>
+                <li><a href="{{ path('battle_report') }}" > Battle reports </a></li>
+               <li><a href="{{ path('map') }}" class="navbar-brand"> Map </a></li>
+            </ul>
             </div>
 
         {% endif %}
 
-    {% endblock %}
 
-    <div class="container body-container">
-        {% block body %}
-            <div class="row">
-                <div id="main" class="col-sm-9">
-                    {% block main %}{% endblock %}
-                </div>
+            <div id="main" class="main">
+                {% block main %}{% endblock %}
             </div>
-        {% endblock %}
-    </div>
 
-    {% block footer %}
-        <footer>
-            <div class="container modal-footer">
-                <p>&copy; 2016 - Software University Foundation</p>
-            </div>
-        </footer>
-    {% endblock %}
-
-    {% block javascripts %}
-        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.js') }}"></script>
     {% endblock %}
 
 
+{% block footer %}
+    <footer>
+        <div class="footer">
+            <p>&copy; 2017 - Final Game Project for PHP Web Dev @ SoftUni</p>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
 </div>
 </body>
 </html>
