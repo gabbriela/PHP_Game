@@ -1,37 +1,45 @@
 
 
+<ul class="nav navbar-nav">
+<li class=""><a>Resources: </a></li>
     {% for resource in resources %}
-        {% if resource.resources.name == "gold" %}
-        <li class="li-center">
-            <a >
-                <img src="{{ asset('images/gold.png') }}" class="resource-img">
-                {{ resource.resources.name }} : {{ resource.amount }}
-            </a>
 
-        </li>
-        {% elseif resource.resources.name == "food" %}
-            <li class="li-center">
-                <a >
-                    <img src="{{ asset('images/food.png') }}" class="resource-img">
-                    {{ resource.resources.name }} : {{ resource.amount }}
-                </a>
+            {% if resource.resources.name == "gold" %}
 
-            </li>
-        {% elseif resource.resources.name == "wood" %}
-            <li class="li-center">
-                <a >
-                    <img src="{{ asset('images/wood.png') }}" class="resource-img">
-                    {{ resource.resources.name }} : {{ resource.amount }}
-                </a>
+                <li class="li-center">
+                    <a >
+                        <!-- <img src="{{ asset('images/gold.png') }}" class="resource-img img-responsive"> -->
+                        {{ resource.resources.name }} : {{ resource.amount }}
+                    </a>
 
-            </li>
-        {% elseif resource.resources.name == "stone" %}
-            <li class="li-center">
-                <a >
-                    <img class="resource-img" src="{{ asset('images/stone.png') }}">
-                    {{ resource.resources.name }} : {{ resource.amount }}
-                </a>
+                </li>
+            {% elseif resource.resources.name == "food" %}
+                <li class="li-center">
+                    <a >
+                        <!--  <img src="{{ asset('images/food.png') }}" class="resource-img"> -->
+                        {{ resource.resources.name }} : {{ resource.amount }}
+                    </a>
 
-            </li>
-        {% endif %}
+                </li>
+            {% elseif resource.resources.name == "wood" %}
+                <li class="li-center">
+                    <a >
+                        <!--   <img src="{{ asset('images/wood.png') }}" class="resource-img">  -->
+                        {{ resource.resources.name }} : {{ resource.amount }}
+                    </a>
+
+                </li>
+            {% elseif resource.resources.name == "stone" %}
+                <li class="li-center">
+                    <a >
+                        <!--     <img class="resource-img" src="{{ asset('images/stone.png') }}"> -->
+                        {{ resource.resources.name }} : {{ resource.amount }}
+                    </a>
+
+                </li>
+            {% endif %}
+
+
+
     {% endfor %}
+</ul>
