@@ -23,7 +23,7 @@ class MapController extends Controller
 
         $user = $this->getUser();
 
-        return $this->render("information/map.html.twig",
+        return $this->render("Map/map.html.twig",
             ['mapAll' => $map, 'currentUser' => $currentUser, 'size'=>$size]);
     }
 }

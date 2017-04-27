@@ -22,7 +22,7 @@ class ResourcesController extends Controller
         $user = $this->getUser();
         $resources = $this->getDoctrine()->getRepository(UserResource::class)->findBy(['user' => $user]);
 
-        return $this->render("information/resources.html.twig",
+        return $this->render("Resources/resources.html.twig",
             ['resources' => $resources]);
     }
 
@@ -100,7 +100,7 @@ class ResourcesController extends Controller
 
         if ($resourcesBuildings !== null)
         {
-            return $this->render("information/resourceExplore.html.twig", ['buildingsToExplore' => $buildingsToExplore]);
+            return $this->render("Resources/resourceExplore.html.twig", ['buildingsToExplore' => $buildingsToExplore]);
         }
 
         return $this->render('user/profile.html.twig');

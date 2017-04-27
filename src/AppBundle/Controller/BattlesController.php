@@ -196,7 +196,7 @@ class BattlesController extends Controller
         $userWinner = $this->getDoctrine()->getRepository(BattleReport::class)->findBy(['winner' => $user]);
         $userLooser = $this->getDoctrine()->getRepository(BattleReport::class)->findBy(['looser' => $user]);
 
-        return $this->render('information/attackInformation.html.twig',[
+        return $this->render('Attacks/attackInformation.html.twig',[
             'currentAttack' => $userAttacksUpdated,
             'userWinner' => $userWinner,
             'userLooser' => $userLooser]);

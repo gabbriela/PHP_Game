@@ -21,7 +21,7 @@ class BuildingsController extends Controller
         $buildings = $this->getDoctrine()
             ->getRepository(Building::class)->findAll();
     $error = "";
-        return $this->render("information/buildings.html.twig",
+        return $this->render("Buildings/buildings.html.twig",
             ['buildings' => $buildings, 'error' => $error]);
     }
 
@@ -86,7 +86,7 @@ class BuildingsController extends Controller
             $buildings = $this->getDoctrine()
                 ->getRepository(Building::class)->findAll();
 
-            return $this->render("information/buildings.html.twig",
+            return $this->render("Buildings/buildings.html.twig",
                 ['buildings' => $buildings, 'error' => $error]);
         }
 
@@ -149,7 +149,7 @@ class BuildingsController extends Controller
 
             $error = "Not enough resources.";
 
-            return $this->render("information/buildings.html.twig",
+            return $this->render("Buildings/buildings.html.twig",
                 ['buildings' => $buildings, 'error' => $error]);
         }
 

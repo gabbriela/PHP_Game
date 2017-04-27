@@ -25,7 +25,7 @@ class UnitsController extends Controller
 
         $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
 
-        return $this->render('information/hireUnits.html.twig', ['units' => $units, 'error' => $error]);
+        return $this->render('Units/hireUnits.html.twig', ['units' => $units, 'error' => $error]);
     }
 
     /**
@@ -78,6 +78,6 @@ class UnitsController extends Controller
 
         $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
 
-        return $this->render('information/hireUnits.html.twig', ['units' => $units, 'error' => $error]);
+        return $this->render('Units/hireUnits.html.twig', ['units' => $units, 'error' => $error]);
     }
 }

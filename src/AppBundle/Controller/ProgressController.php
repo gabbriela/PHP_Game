@@ -141,7 +141,7 @@ class ProgressController extends Controller
             $unitsAfter[] = ['name' => $unit->getUnit()->getName(), 'readyAfter' => $dateDiff->format('%H:%I:%S')];
         }
 
-        return $this->render("information/progress.html.twig", ['progressBuildings' => $buildingsReadyAfter,
+        return $this->render("Buildings/progress.html.twig", ['progressBuildings' => $buildingsReadyAfter,
                                                                 'levelBuildings' => $buildingsLevelAfter ,
                                                                 'units' => $unitsAfter]);
     }

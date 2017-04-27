@@ -44,7 +44,7 @@ class AttacksController extends Controller
             'status' => 'free'],
             array('unitId' => 'ASC'));
 
-        return $this->render('information/attackPrepare.html.twig',[
+        return $this->render('Attacks/attackPrepare.html.twig',[
             'victim' => $victimName,
             'units' => $units,
             'victimId' => $id,

@@ -54,6 +54,7 @@ class UsersController extends Controller
             $startBuildings =[$castle, $house1, $house2, $farm];
 
             foreach($startBuildings as $building){
+
                 $userBuilding = new UserBuilding();
                 $userBuilding->setUser($user);
                 $userBuilding->setBuilding($building);

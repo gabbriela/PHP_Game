@@ -134,7 +134,7 @@ class HomeController extends Controller
 
         $buildings = $this->getDoctrine()->getRepository(UserBuilding::class)->findBy(['user' => $user], array('buildingId' =>'ASC'));
 
-        return $this->render("default/home.html.twig", [
+        return $this->render("Home/home.html.twig", [
             'user'=>$user,
             'buildings' => $buildings,
             'unitsFree' => $unitsFree,
