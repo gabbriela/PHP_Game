@@ -162,7 +162,7 @@ class ProgressBuilding
         $this->user = $user;
     }
 
-    /**
+     /**
      * @return Building
      */
     public function getBuilding()
