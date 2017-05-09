@@ -9,8 +9,12 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\UserUnits;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @property  Container container
+ */
 class AttacksController extends Controller
 {
     /**
@@ -24,6 +28,7 @@ class AttacksController extends Controller
 
         $attacker = $this->getUser();
         $victim = $this->getDoctrine()->getRepository(User::class)->find($victimId);
+
         $distanceVictim = $victim->getMap()->getPositionX() + $victim->getMap()->getPositionY();
         $distanceAttacker = $attacker->getMap()->getPositionX() + $attacker->getMap()->getPositionY();
 
@@ -33,16 +38,11 @@ class AttacksController extends Controller
 
         $arriveAfter = ($now->add(new \DateInterval('PT' . $distance . 'S')))->format('H:i:s');
 
-        //var_dump($id); exit;
-        //victimID
         $victimName = $this->getDoctrine()->getRepository(User::class)->find($id)->getFullName();
 
         $user = $this->getUser();
 
-        $units = $this->getDoctrine()->getRepository(UserUnits::class)->findBy([
-            'user' => $user,
-            'status' => 'free'],
-            array('unitId' => 'ASC'));
+        $units = $this->getDoctrine()->getRepository(UserUnits::class)->getUserUnitsByStatus($user, "free");
 
         return $this->render('Attacks/attackPrepare.html.twig',[
             'victim' => $victimName,
@@ -63,6 +63,11 @@ class AttacksController extends Controller
     {
         $unitsInAttack = $request->get('units');
         $victimId = $request->get('victimId');
+
+        if ($unitsInAttack === NULL){
+            //var_dump($unitsInAttack);exit;
+            $this->redirectToRoute('battle_report');
+        }
 
         $attacker = $this->getUser();
         $victim = $this->getDoctrine()->getRepository(User::class)->find($victimId);
@@ -87,13 +92,8 @@ class AttacksController extends Controller
         $em->persist($attack);
         $em->flush();
 
-        //var_dump($victim); exit;
 
-        $attackId = $this->getDoctrine()->getRepository(Attack::class)->findOneBy(['attacker' => $attacker,
-            'victim' => $victim,
-            'status' =>'progress']);
-
-        //var_dump($attackId); exit;
+        $attackId = $this->getDoctrine()->getRepository(Attack::class)->getAttack($attacker, $victim, "progress")[0];
 
         //make units busy
         foreach ($unitsInAttack as $busyUnitId)

@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class UserUnitsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUserUnitsByStatus($user, $status)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.status = :status')
+            ->setParameter('status', $status)
+            ->andWhere('u.user = :user')
+            ->setParameter('user', $user)
+            ->addOrderBy('u.id', 'ASC')
+            ->getQuery()
+            ->execute();
+    }
 }

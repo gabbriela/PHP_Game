@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -14,6 +15,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
+    const USER_ROLE = 'USER_ROLE';
+    const ADMIN_ROLE = 'ADMIN_ROLE';
+
     /**
      * @var int
      *
@@ -27,6 +32,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email()
+     * @Assert\NotBlank()
      */
     private $email;
 
@@ -122,6 +129,13 @@ class User implements UserInterface
      */
     private $looserReport;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=100, unique=false)
+     */
+    private $role;
+
 
     public function __construct()
     {
@@ -136,6 +150,7 @@ class User implements UserInterface
         $this->userProgressUnits = new ArrayCollection();
         $this->winnerReport = new ArrayCollection();
         $this->looserReport = new ArrayCollection();
+        $this->role = self::USER_ROLE;
     }
 
 
@@ -480,5 +495,23 @@ class User implements UserInterface
     {
         $this->winnerReport = $winnerReport;
     }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole(string $role)
+    {
+        $this->role = $role;
+    }
+
+
 }
 

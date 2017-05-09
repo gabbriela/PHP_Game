@@ -8,8 +8,29 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-building_progress:
-        class: AppBundle\Entity\ProgressBuilding
+#Repo
+         repo.attack:
+                class: Doctrine\ORM\EntityRepository
+                factory: ["@doctrine.orm.entity_manager", getRepository]
+                arguments:
+                    - \AppBundle\Entity\Attack
 
-user_building:
-        class: AppBundle\Entity\UserBuilding
+         attack_manager:
+               class: AppBundle\Service\AttackPrepareService
+               arguments: ['@repo.attack']
+
+         price_calculator:
+               class: AppBundle\Service\AttackPrepareService
+               arguments: ['@attack_manager']
+
+
+
+         repo.map:
+               class: Doctrine\ORM\EntityRepository
+               factory: ["@doctrine.orm.entity_manager", getRepository]
+               arguments:
+                  - \AppBundle\Entity\Map
+
+         map_manager:
+               class: AppBundle\Service\MapService
+               arguments: ['@repo.map']

@@ -75,7 +75,6 @@ class UnitsController extends Controller
             else {$error = "Not enough resources."; }
         }
 
-
         $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
 
         return $this->render('Units/hireUnits.html.twig', ['units' => $units, 'error' => $error]);

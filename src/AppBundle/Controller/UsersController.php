@@ -35,7 +35,7 @@ class UsersController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
+            // 3) Encode the password
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
@@ -45,7 +45,7 @@ class UsersController extends Controller
             $em->persist($user);
             $em->flush();
 
-            //initial buildings: 1 castle, 2 houses, 1 farm
+            // 5) initial buildings: 1 castle, 2 houses, 1 farm
             $castle = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'Castle']);
             $house1 = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'House']);
             $house2 = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'House']);

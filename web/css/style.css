@@ -1,0 +1,18 @@
+table.borderless td,table.borderless th{
+    background-color: #f7e1b5;
+    border: none !important;
+}
+
+.map {
+    width: 900px;
+}
+
+table.borderless>tbody>tr>td,
+table.borderless>tbody>tr>th,
+table.borderless>tfoot>tr>td,
+table.borderless>tfoot>tr>th,
+table.borderless>thead>tr>td,
+table.borderless>thead>tr>th {
+    padding: 0;
+}
+

@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class AttackRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAttack($attacker, $victim, $status)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.attacker = :attacker')
+            ->setParameter('attacker', $attacker)
+            ->andWhere('a.victim = :victim')
+            ->setParameter('victim', $victim)
+            ->andWhere('a.status = :status')
+            ->setParameter('status', $status)
+            ->getQuery()->execute();
+    }
+
+
 }

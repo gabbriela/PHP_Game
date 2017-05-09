@@ -140,6 +140,7 @@ class BattlesController extends Controller
 
                         $winnerFood = $this->getDoctrine()->getRepository(UserResource::class)->findOneBy([
                             'user'=>$winner, 'resourceId' => 1]);
+
                         $winnerFood->setAmount((int)($winnerFood->getAmount() + $stolenFood));
                         $em->persist($winnerFood);
 

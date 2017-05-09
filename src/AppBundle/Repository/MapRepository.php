@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Map;
 
 /**
  * MapRepository
@@ -10,4 +11,5 @@ namespace AppBundle\Repository;
  */
 class MapRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

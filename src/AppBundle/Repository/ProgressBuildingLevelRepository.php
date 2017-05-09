@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ProgressBuildingLevelRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBuildingsLevelByStatus($user, $status)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.status = :status')
+            ->setParameter('status', $status)
+            ->andWhere('b.user = :user')
+            ->setParameter('user', $user)
+            ->addOrderBy('b.id', 'ASC')
+            ->getQuery()
+            ->execute();
+    }
 }

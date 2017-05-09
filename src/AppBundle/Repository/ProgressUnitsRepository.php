@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class ProgressUnitsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUnitsByStatus($user, $status)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.user = :user')
+            ->setParameter('user',$user)
+            ->andWhere('u.status = :status')
+            ->setParameter('status', $status)
+            ->getQuery()
+            ->execute();
+    }
 }

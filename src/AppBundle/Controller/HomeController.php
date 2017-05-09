@@ -30,7 +30,7 @@ class HomeController extends Controller
         $user = $this->getUser();
 
         //Update buildings
-        $progressBuildings = $this->getDoctrine()->getRepository(ProgressBuilding::class)->findBy(['user' => $user, 'status' => "progress"]);
+        $progressBuildings = $this->getDoctrine()->getRepository(ProgressBuilding::class)->getBuildingsByStatus($user, "progress");
 
         foreach ($progressBuildings as $progressBuilding) {
 
@@ -73,7 +73,7 @@ class HomeController extends Controller
         }
 
         //Update units
-        $progressUnits = $this->getDoctrine()->getRepository(ProgressUnits::class)->findBy(['user' => $user, 'status' => "progress"]);
+        $progressUnits = $this->getDoctrine()->getRepository(ProgressUnits::class)->getUnitsByStatus($user, "progress");
 
         foreach ($progressUnits as $progressUnit) {
             $now = new \DateTime('now');
@@ -99,7 +99,7 @@ class HomeController extends Controller
 
         //Update buildings level
 
-        $progressLevel = $this->getDoctrine()->getRepository(ProgressBuildingLevel::class)->findBy(['user' => $user, 'status' => "progress"]);
+        $progressLevel = $this->getDoctrine()->getRepository(ProgressBuildingLevel::class)->getBuildingsLevelByStatus($user, "progress");
 
         foreach ($progressLevel as $levelCheck)
         {
@@ -121,18 +121,13 @@ class HomeController extends Controller
         }
 
 
+        $unitsFree = $this->getDoctrine()->getRepository(UserUnits::class)->getUserUnitsByStatus($user, "free");
 
-        $unitsFree = $this->getDoctrine()->getRepository(UserUnits::class)->findBy([
-            'user' => $user,
-            'status'=> 'free'],
-            array('unitId' => 'ASC'));
+        $unitsBusy = $this->getDoctrine()->getRepository(UserUnits::class)->getUserUnitsByStatus($user, "busy");
 
-        $unitsBusy = $this->getDoctrine()->getRepository(UserUnits::class)->findBy([
-            'user' => $user,
-            'status'=> 'busy'],
-            array('unitId' => 'ASC'));
 
-        $buildings = $this->getDoctrine()->getRepository(UserBuilding::class)->findBy(['user' => $user], array('buildingId' =>'ASC'));
+
+        $buildings = $this->getDoctrine()->getRepository(UserBuilding::class)->getUserBuildings($user);
 
         return $this->render("Home/home.html.twig", [
             'user'=>$user,
