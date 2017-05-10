@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class ProgressResourcesRenewRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getResRenewByUser($user)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.user = :id')
+            ->setParameter('id', $user)
+            ->getQuery()
+            ->execute();
+    }
 }

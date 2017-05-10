@@ -5,13 +5,21 @@ parameters:
 
 services:
     attack_start:
-        class: AppBundle\Service\AttackStartService
-        arguments: ['@doctrine.orm.entity_manager']
+            class: AppBundle\Service\AttackStartService
+            arguments: ['@doctrine.orm.entity_manager']
 
     battle_report:
-        class: AppBundle\Service\BattleService
-        arguments: ['@doctrine.orm.entity_manager']
+            class: AppBundle\Service\BattleService
+            arguments: ['@doctrine.orm.entity_manager']
 
     buildings_service:
-        class: AppBundle\Service\BuildingService
-        arguments: ['@doctrine.orm.entity_manager']
+            class: AppBundle\Service\BuildingService
+            arguments: ['@doctrine.orm.entity_manager']
+
+    progress_service:
+            class: AppBundle\Service\ProgressService
+            arguments: ['@doctrine.orm.entity_manager']
+
+    resources_service:
+                class: AppBundle\Service\ResourcesService
+                arguments: ['@doctrine.orm.entity_manager']

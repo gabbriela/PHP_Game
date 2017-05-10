@@ -20,6 +20,18 @@ class UserBuildingRepository extends \Doctrine\ORM\EntityRepository
             ->execute();
     }
 
+    public function getUserBuildingsByBuildingId($user, $buildingId)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('b.buildingId = :buildingId')
+            ->setParameter('buildingId', $buildingId)
+            ->addOrderBy('b.id', 'ASC')
+            ->getQuery()
+            ->execute();
+    }
+
     public function getBuildingById($id)
     {
         return $this->createQueryBuilder('b')

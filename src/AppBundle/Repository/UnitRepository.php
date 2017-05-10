@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class UnitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUnitById($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute()[0];
+    }
 }
