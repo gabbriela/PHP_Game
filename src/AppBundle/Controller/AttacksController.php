@@ -7,6 +7,7 @@ use AppBundle\Entity\AttackUnits;
 use AppBundle\Entity\Unit;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserUnits;
+use AppBundle\Service\AttackStartService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Container;
@@ -61,64 +62,30 @@ class AttacksController extends Controller
      */
     public function attackStartAction(Request $request)
     {
+        $attackStartService = $this->container->get('attack_start');
+
+        //get request data
         $unitsInAttack = $request->get('units');
         $victimId = $request->get('victimId');
 
         if ($unitsInAttack === NULL){
-            //var_dump($unitsInAttack);exit;
             $this->redirectToRoute('battle_report');
         }
 
         $attacker = $this->getUser();
         $victim = $this->getDoctrine()->getRepository(User::class)->find($victimId);
-        $distanceVictim = $victim->getMap()->getPositionX() + $victim->getMap()->getPositionY();
-        $distanceAttacker = $attacker->getMap()->getPositionX() + $attacker->getMap()->getPositionY();
 
-        $distance = abs($distanceAttacker - $distanceVictim) * 100;
+        //calculate distance
+        $distance = $attackStartService->calculateDistance($victim, $attacker);
 
-        $attackerUnitsLife = 0;
-        $attackerUnitsDmg = 0;
-
-
-        $attack = new Attack();
-        $attack->setStatus("progress");
-        $attack->setAttacker($attacker);
-        $attack->setVictim($victim);
-
-        $now = new \DateTime('now');
-
-        $attack->setArriveOn($now->add(new \DateInterval('PT' . $distance . 'S')));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($attack);
-        $em->flush();
+        //create new attack
+        $attackStartService->createNewAttack($victim, $attacker, $distance);
 
 
         $attackId = $this->getDoctrine()->getRepository(Attack::class)->getAttack($attacker, $victim, "progress")[0];
 
         //make units busy
-        foreach ($unitsInAttack as $busyUnitId)
-        {
-            $unit = $this->getDoctrine()->getRepository(UserUnits::class)->find($busyUnitId);
-            $unit->setStatus('busy');
-
-            $attackerUnitsLife += $unit->getLifePoints();
-            $checkUnit = $unit->getUnitId();
-            $attackerUnitsDmg += $this->getDoctrine()->getRepository(Unit::class)->find($checkUnit)->getDamage();
-
-            $userUnit = $this->getDoctrine()->getRepository(UserUnits::class)->find($busyUnitId);
-
-            $attackUnit = new AttackUnits();
-            $attackUnit->setStatus('progress');
-            $attackUnit->setAttack($attackId);
-            $attackUnit->setUserUnit($userUnit);
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($unit);
-            $em->persist($attackUnit);
-            $em->flush();
-        }
-
+        $attackStartService->makeUnitsBusy($unitsInAttack, $attackId);
 
         return $this->redirectToRoute('home_page') ;
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\Query;
 
 /**
  * BuildingRepository
@@ -10,4 +11,18 @@ namespace AppBundle\Repository;
  */
 class BuildingRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllBuildings()
+    {
+        return $this->createQueryBuilder('building')
+            ->getQuery()->getResult(Query::HYDRATE_ARRAY);
+    }
+
+    public function getBuildingById($id)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute()[0];
+    }
 }

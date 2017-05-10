@@ -23,13 +23,8 @@ class MapController extends Controller
         $currentUser = $this->getUser();
 
         $map = $this->getDoctrine()->getRepository(Map::class)->findBy(array(), array('positionY' => 'ASC', 'positionX' => 'ASC'));
-
-        //$mapService = $this->container->get('map_manager');
-        //$map = $mapService->GetUsersOnMap();
-
+        //$map = $this->getDoctrine()->getRepository(Map::class)->getPlayersOnMap();
         $size = count($map);
-
-        $user = $this->getUser();
 
         return $this->render("Map/map.html.twig",
             ['mapAll' => $map, 'currentUser' => $currentUser, 'size'=>$size]);

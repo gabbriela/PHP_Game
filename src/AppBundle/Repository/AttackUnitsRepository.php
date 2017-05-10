@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class AttackUnitsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAttackUnits($attack, $status)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.attack = :attack')
+            ->setParameter('attack', $attack)
+            ->andWhere('u.status = :status')
+            ->setParameter('status', $status)
+            ->addOrderBy('u.id', 'ASC')
+            ->getQuery()->execute();
+    }
 }

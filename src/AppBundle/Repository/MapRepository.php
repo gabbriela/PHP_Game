@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 use AppBundle\Entity\Map;
+use Doctrine\ORM\Query;
 
 /**
  * MapRepository
@@ -11,5 +12,9 @@ use AppBundle\Entity\Map;
  */
 class MapRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    public function getPlayersOnMap()
+    {
+        return $this->createQueryBuilder('map')
+            ->getQuery()->getResult(Query::HYDRATE_ARRAY);
+    }
 }

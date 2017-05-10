@@ -21,4 +21,13 @@ class UserUnitsRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function findUnitById($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute()[0];
+    }
 }

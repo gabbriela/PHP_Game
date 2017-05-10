@@ -4,33 +4,14 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    attack_start:
+        class: AppBundle\Service\AttackStartService
+        arguments: ['@doctrine.orm.entity_manager']
 
-#Repo
-         repo.attack:
-                class: Doctrine\ORM\EntityRepository
-                factory: ["@doctrine.orm.entity_manager", getRepository]
-                arguments:
-                    - \AppBundle\Entity\Attack
+    battle_report:
+        class: AppBundle\Service\BattleService
+        arguments: ['@doctrine.orm.entity_manager']
 
-         attack_manager:
-               class: AppBundle\Service\AttackPrepareService
-               arguments: ['@repo.attack']
-
-         price_calculator:
-               class: AppBundle\Service\AttackPrepareService
-               arguments: ['@attack_manager']
-
-
-
-         repo.map:
-               class: Doctrine\ORM\EntityRepository
-               factory: ["@doctrine.orm.entity_manager", getRepository]
-               arguments:
-                  - \AppBundle\Entity\Map
-
-         map_manager:
-               class: AppBundle\Service\MapService
-               arguments: ['@repo.map']
+    buildings_service:
+        class: AppBundle\Service\BuildingService
+        arguments: ['@doctrine.orm.entity_manager']

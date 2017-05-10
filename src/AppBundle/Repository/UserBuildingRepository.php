@@ -19,4 +19,13 @@ class UserBuildingRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function getBuildingById($id)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute()[0];
+    }
 }

@@ -6,6 +6,11 @@
 
 {% block main %}
 
+
+    {% block javascripts %}
+        <script src="{{ asset('js/timer.js') }}"></script>
+    {% endblock %}
+
     <div>Build in progress</div>
     <table class="table-responsive table table-bordered table-hover table-condensed">
         <thead>
@@ -15,13 +20,14 @@
             <th>Ready after</th>
         </thead>
         {% for building in progressBuildings %}
+
+           <!-- <script>showTime('{{ building['readyAfter'] }}')</script>  -->
         <tr>
             <td>{{ building['building'] }}</td>
             <td>{{ building['readyAfter'] }}</td>
         </tr>
         {% endfor %}
     </table>
-
     <br>
 
     <div>Level Up in progress</div>
