@@ -14,7 +14,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\Container;
 
+/**
+ * @property  Container container
+ */
 class UsersController extends Controller
 {
     /**
@@ -25,6 +29,8 @@ class UsersController extends Controller
     public function registerAction(Request $request)
     {
         $error = '';
+
+        $userService = $this->container->get('user_service');
 
         // 1) build the form
         $user = new User();
@@ -46,37 +52,9 @@ class UsersController extends Controller
             $em->flush();
 
             // 5) initial buildings: 1 castle, 2 houses, 1 farm
-            $castle = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'Castle']);
-            $house1 = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'House']);
-            $house2 = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'House']);
-            $farm = $this->getDoctrine()->getRepository(Building::class)->findOneBy(['name' => 'Farm']);
+            $userService->setInitialsBuildings($user);
 
-            $startBuildings =[$castle, $house1, $house2, $farm];
-
-            foreach($startBuildings as $building){
-
-                $userBuilding = new UserBuilding();
-                $userBuilding->setUser($user);
-                $userBuilding->setBuilding($building);
-                $userBuilding->setBuildingLevel(1);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($userBuilding);
-                $em->flush();
-
-                if($building->getName() == 'Farm'){
-                    $now = new \DateTime('now');
-                    $resourceBuilding = new ProgressResourcesRenew();
-                    $resourceBuilding->setUserBuilding($userBuilding);
-                    $resourceBuilding->setLastUpdateOn($now);
-                    $resourceBuilding->setUser($user);
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($resourceBuilding);
-                    $em->flush();
-                }
-            }
-
-
+            // 6)set initial resources
             $initialResources = $this->getDoctrine()->getRepository(Resources::class)->findAll();
 
             foreach ($initialResources as $res){

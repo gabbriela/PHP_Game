@@ -21,5 +21,9 @@ services:
             arguments: ['@doctrine.orm.entity_manager']
 
     resources_service:
-                class: AppBundle\Service\ResourcesService
-                arguments: ['@doctrine.orm.entity_manager']
+            class: AppBundle\Service\ResourcesService
+            arguments: ['@doctrine.orm.entity_manager']
+
+    user_service:
+            class: AppBundle\Service\UserService
+            arguments: ['@doctrine.orm.entity_manager']

@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\Query;
 
 /**
  * ResourcesRepository
@@ -10,4 +11,10 @@ namespace AppBundle\Repository;
  */
 class ResourcesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllResources()
+    {
+        return $this->createQueryBuilder('resources')->getAllAliases();
+            //->getQuery()->getResult(Query::HYDRATE_ARRAY);
+    }
 }
+

@@ -25,4 +25,13 @@ class BuildingRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->execute()[0];
     }
+
+    public function getBuildingByName($name)
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->execute()[0];
+    }
 }
