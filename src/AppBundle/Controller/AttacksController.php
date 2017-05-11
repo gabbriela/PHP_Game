@@ -3,11 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Attack;
-use AppBundle\Entity\AttackUnits;
-use AppBundle\Entity\Unit;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserUnits;
-use AppBundle\Service\AttackStartService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Container;
