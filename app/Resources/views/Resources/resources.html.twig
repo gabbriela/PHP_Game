@@ -39,7 +39,18 @@
                 </li>
             {% endif %}
 
-
-
     {% endfor %}
+</ul>
+<p></p>
+<ul class="nav navbar-nav">
+
+    {% if attacks != null %}
+        <li class=""><a>Attacks: </a></li>
+        {% for attack in attacks %}
+
+            <li><a style="color: red">Attacker: {{ attack.victim.fullName }}</a></li>
+            <li><a style="color: red">Arrive On: {{ attack.arriveOn|date('H:i:s') }}</a></li>
+            <br/>
+        {% endfor %}
+    {% endif %}
 </ul>

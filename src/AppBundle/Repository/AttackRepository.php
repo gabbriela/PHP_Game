@@ -32,4 +32,14 @@ class AttackRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('status', $status)
             ->getQuery()->execute();
     }
+
+    public function getVictimAttacks ($user, $status)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.victim = :user')
+            ->setParameter('user', $user)
+            ->andWhere('a.status = :status')
+            ->setParameter('status', $status)
+            ->getQuery()->execute()[0];
+    }
 }

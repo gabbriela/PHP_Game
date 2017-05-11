@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\UserResource;
+use AppBundle\Entity\Attack;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Container;
@@ -21,8 +22,17 @@ class ResourcesController extends Controller
         $user = $this->getUser();
         $resources = $this->getDoctrine()->getRepository(UserResource::class)->getUserResources($user);
 
+        //$attacksToMe = $this->getDoctrine()->getRepository(Attack::class)->getVictimAttacks($user, "progress");
+        //$attacksToMe = $this->getDoctrine()->getRepository(Attack::class)->findBy(['victim' => $user, 'status' => 'progress']);
+
+        $attacksToMe = $this->getDoctrine()->getRepository(Attack::class)->findBy(['victim' => $user, 'status' => 'progress']);
+
+foreach ($attacksToMe as $att)
+{
+
+}
         return $this->render("Resources/resources.html.twig",
-            ['resources' => $resources]);
+            ['resources' => $resources, 'attacks' => $attacksToMe]);
     }
 
     /**
