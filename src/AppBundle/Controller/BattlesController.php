@@ -23,7 +23,6 @@ class BattlesController extends Controller
      */
     public function reportAction()
     {
-
         $battleService = $this->container->get('battle_report');
 
         $user = $this->getUser();

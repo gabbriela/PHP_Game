@@ -48,7 +48,7 @@
         <li class=""><a>Attacks: </a></li>
         {% for attack in attacks %}
 
-            <li><a style="color: red">Attacker: {{ attack.victim.fullName }}</a></li>
+            <li><a style="color: red">Attacker: {{ attack.attacker.fullName }}</a></li>
             <li><a style="color: red">Arrive On: {{ attack.arriveOn|date('H:i:s') }}</a></li>
             <br/>
         {% endfor %}
